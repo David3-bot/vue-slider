@@ -5,65 +5,45 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Slider</title>
+    <title>Nightmare 3</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 
 <body>
 
     <div id="app">
-        <main class="container pb-5">
-          <h1 class="my-5">Vue Intro | Direttive</h1>
-    
-          <div class="row justify-content-center">
-            <div class="col-md-6">
-    
-              <div class="card">
-                <img :src="movie.images[currentImageIndex]" class="card-img-top" alt="...">
-                
-                <!-- <h3>{{ movie.images[currentImageIndex].title }}</h3> -->
-                <!-- <h3>{{ movie.images[currentImageIndex].description }}</h3> -->
-    
-                <!-- Pulsanti in sovraimpressione per cambiare l'immagine -->
-                <div class="btns-container">
-                  <button class="btn btn-light" @click="goPrev">
-                    <i class="fas fa-chevron-left"></i>
-                  </button>
-    
-                  <div class="flex-fill"></div>
-    
-                  <button class="btn btn-light" @click="goNext">
-                    <i class="fas fa-chevron-right"></i>
-                  </button>
-                </div>
-    
-                <!-- anteprima immagini -->
-                <div class="d-flex flex-wrap">
-    
-                  <!-- Html di una singola anteprima -->
-                  <!-- 
-                    :class -> ad ogni ciclo del for, prendiamo l'indice i.
-                              Se i è uguale a currentImageIndex, allora sono la stessa immagine 
-                              e devo mettere la classe active
-                   -->
-                  <div v-for="(image, i) in movie.images" class="thumbnail-container"
-                    :class="(i === currentImagesIndex) ? 'active' : ''"
-                    :style=" `width: calc(100% / ${movie.images.length})` "
-                    @click="onThumbnailClick(i)">
-    
-                    <img :src="image" alt="" class="img-fluid">
-                    
-                  </div>
-                </div>
-              </div>
-    
-            </div>
-          </div>
-    
-        </main>
-      </div>
 
-    <script src='https://unpkg.com/vue@3/dist/vue.global.js'></script>
+        <div class="container">
+            <div class="slider-wrapper" tabindex="0">
+
+                <div class="item">
+                    <img :src="slides.images[currentIndex]" alt=""/>
+                    <div class="text">
+
+                        <h3>{{slides.titles[currentIndex]}}</h3>
+                        <p>{{slides.text[currentIndex]}}</p>
+                    </div>
+                </div>
+
+                <div class="thumbs">
+                    <div class="prev" @click="goPrev"></div>
+                    <div class="next" @click="goNext"></div>
+
+                    <div v-for="(images, i) in slides.images" class="thumb"
+                        :class="(i === currentIndex) ? 'active' : '' " @click="onthumbImage(i)">
+                        <img :src="images" alt=""/>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
     <script src="../javas/script.js"></script>
 </body>
 
